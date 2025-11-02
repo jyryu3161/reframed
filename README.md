@@ -158,6 +158,38 @@ benchmark.add_method(MyMethod())
 
 See `custom_method_template.py` for detailed templates and examples.
 
+#### 🆕 Model Validation with Gene Essentiality
+
+Validate model predictions using experimental gene knockout data:
+
+```python
+from gene_essentiality_evaluation import load_essentiality_data, GeneEssentialityEvaluator
+
+# Load experimental essentiality data
+ess_data = load_essentiality_data('data/ecoli_gene_essentiality.csv')
+
+# Evaluate model
+evaluator = GeneEssentialityEvaluator(model, ess_data, growth_threshold=0.01)
+evaluation = evaluator.evaluate_fba()
+
+# Print results
+evaluator.print_metrics(evaluation)
+evaluator.print_confusion_matrix(evaluation)
+
+# Compare methods
+comparison = evaluator.compare_methods(['fba', 'pfba', 'gimme'], gene_exp)
+```
+
+**Performance Metrics:**
+- Accuracy: Overall correctness
+- Precision: True essential / Predicted essential
+- Recall: True essential / Actual essential
+- F1-Score: Harmonic mean of precision and recall
+- MCC: Matthews Correlation Coefficient
+
+**Data Format:**
+See `examples/data/ecoli_gene_essentiality.csv` for example format.
+
 #### Typical Workflow
 
 1. **Prepare expression data**: Convert to dictionary `{gene_id: expression_value}`
