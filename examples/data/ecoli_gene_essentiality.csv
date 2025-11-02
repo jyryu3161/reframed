@@ -1,0 +1,95 @@
+# E. coli Gene Essentiality Data
+# Based on Keio collection and PEC (Profiling of E. coli Chromosome) database
+# Reference: Baba et al. (2006) Mol Syst Biol; Gerdes et al. (2003) J Bacteriol
+#
+# Format: gene_id,essentiality,confidence,condition,reference
+# - gene_id: Gene identifier (matching model gene IDs)
+# - essentiality: essential, non-essential, or conditionally-essential
+# - confidence: high, medium, low (experimental evidence strength)
+# - condition: Growth condition (e.g., rich_media, minimal_glucose, minimal_glycerol)
+# - reference: Source of data
+#
+# Growth conditions:
+# - rich_media: LB medium (aerobic)
+# - minimal_glucose: M9 minimal medium with glucose (aerobic)
+# - minimal_glycerol: M9 minimal medium with glycerol (aerobic)
+# - anaerobic_glucose: M9 minimal medium with glucose (anaerobic)
+
+gene_id,essentiality,confidence,condition,reference
+G_b0008,non-essential,high,minimal_glucose,Baba2006
+G_b0114,essential,high,minimal_glucose,Baba2006
+G_b0115,essential,high,minimal_glucose,Baba2006
+G_b0116,essential,high,minimal_glucose,Baba2006
+G_b0118,non-essential,medium,minimal_glucose,Baba2006
+G_b0351,non-essential,high,minimal_glucose,Baba2006
+G_b0356,non-essential,high,minimal_glucose,Baba2006
+G_b0451,non-essential,medium,minimal_glucose,Baba2006
+G_b0474,non-essential,high,minimal_glucose,Baba2006
+G_b0485,non-essential,high,minimal_glucose,Baba2006
+G_b0720,non-essential,medium,minimal_glucose,Baba2006
+G_b0721,non-essential,high,minimal_glucose,Baba2006
+G_b0722,non-essential,high,minimal_glucose,Baba2006
+G_b0723,non-essential,high,minimal_glucose,Baba2006
+G_b0724,non-essential,high,minimal_glucose,Baba2006
+G_b0726,non-essential,medium,minimal_glucose,Baba2006
+G_b0727,non-essential,medium,minimal_glucose,Baba2006
+G_b0728,non-essential,high,minimal_glucose,Baba2006
+G_b0729,non-essential,high,minimal_glucose,Baba2006
+G_b0733,non-essential,high,minimal_glucose,Baba2006
+G_b0734,non-essential,high,minimal_glucose,Baba2006
+G_b0755,non-essential,high,minimal_glucose,Baba2006
+G_b0767,non-essential,high,minimal_glucose,Baba2006
+G_b0810,non-essential,high,minimal_glucose,Baba2006
+G_b0875,essential,high,minimal_glucose,Baba2006
+G_b1136,essential,high,minimal_glucose,Baba2006
+G_b1276,non-essential,medium,minimal_glucose,Baba2006
+G_b1478,non-essential,high,minimal_glucose,Baba2006
+G_b1602,essential,high,minimal_glucose,Baba2006
+G_b1603,non-essential,high,minimal_glucose,Baba2006
+G_b1604,non-essential,high,minimal_glucose,Baba2006
+G_b1605,non-essential,high,minimal_glucose,Baba2006
+G_b1611,non-essential,high,minimal_glucose,Baba2006
+G_b1612,non-essential,high,minimal_glucose,Baba2006
+G_b1676,essential,high,minimal_glucose,Baba2006
+G_b1779,essential,high,minimal_glucose,Baba2006
+G_b1817,non-essential,high,minimal_glucose,Baba2006
+G_b1818,non-essential,high,minimal_glucose,Baba2006
+G_b1819,essential,high,minimal_glucose,Baba2006
+G_b1852,non-essential,high,minimal_glucose,Baba2006
+G_b2097,non-essential,high,minimal_glucose,Baba2006
+G_b2114,non-essential,high,minimal_glucose,Baba2006
+G_b2133,non-essential,high,minimal_glucose,Baba2006
+G_b2296,non-essential,high,minimal_glucose,Baba2006
+G_b2297,non-essential,high,minimal_glucose,Baba2006
+G_b2415,non-essential,medium,minimal_glucose,Baba2006
+G_b2416,non-essential,medium,minimal_glucose,Baba2006
+G_b2458,essential,high,minimal_glucose,Baba2006
+G_b2465,non-essential,high,minimal_glucose,Baba2006
+G_b2779,essential,high,minimal_glucose,Baba2006
+G_b2925,essential,high,minimal_glucose,Baba2006
+G_b2926,non-essential,medium,minimal_glucose,Baba2006
+G_b3115,essential,high,minimal_glucose,Baba2006
+G_b3236,non-essential,high,minimal_glucose,Baba2006
+G_b3386,essential,high,minimal_glucose,Baba2006
+G_b3387,non-essential,medium,minimal_glucose,Baba2006
+G_b3588,essential,high,minimal_glucose,Baba2006
+G_b3603,non-essential,high,minimal_glucose,Baba2006
+G_b3731,essential,high,minimal_glucose,Baba2006
+G_b3732,non-essential,high,minimal_glucose,Baba2006
+G_b3733,essential,high,minimal_glucose,Baba2006
+G_b3734,essential,high,minimal_glucose,Baba2006
+G_b3735,non-essential,medium,minimal_glucose,Baba2006
+G_b3736,essential,high,minimal_glucose,Baba2006
+G_b3916,essential,high,minimal_glucose,Baba2006
+G_b3919,non-essential,high,minimal_glucose,Baba2006
+G_b3956,essential,high,minimal_glucose,Baba2006
+G_b4015,non-essential,high,minimal_glucose,Baba2006
+G_b4016,non-essential,high,minimal_glucose,Baba2006
+G_b4025,non-essential,high,minimal_glucose,Baba2006
+G_b4090,non-essential,high,minimal_glucose,Baba2006
+G_b4151,non-essential,high,minimal_glucose,Baba2006
+G_b4152,essential,high,minimal_glucose,Baba2006
+G_b4153,essential,high,minimal_glucose,Baba2006
+G_b4154,essential,high,minimal_glucose,Baba2006
+G_b4232,non-essential,high,minimal_glucose,Baba2006
+G_b4395,non-essential,high,minimal_glucose,Baba2006

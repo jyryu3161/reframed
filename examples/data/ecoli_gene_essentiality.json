@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "organism": "Escherichia coli K-12 MG1655",
+    "condition": "minimal_glucose_aerobic",
+    "description": "Gene essentiality data from high-throughput knockout experiments",
+    "references": [
+      "Baba et al. (2006) Mol Syst Biol 2:2006.0008 - Keio collection",
+      "Gerdes et al. (2003) J Bacteriol 185:5673-5684 - PEC database"
+    ],
+    "growth_condition": {
+      "medium": "M9 minimal medium",
+      "carbon_source": "glucose (10 mM)",
+      "oxygen": "aerobic",
+      "temperature": "37C"
+    },
+    "essentiality_threshold": {
+      "essential": "growth_rate < 5% of wild-type",
+      "non-essential": "growth_rate >= 80% of wild-type",
+      "conditionally-essential": "5% <= growth_rate < 80% of wild-type"
+    }
+  },
+  "genes": {
+    "G_b0008": {
+      "name": "talB",
+      "product": "transaldolase B",
+      "essentiality": "non-essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.95,
+      "pathway": "pentose phosphate pathway"
+    },
+    "G_b0114": {
+      "name": "aceE",
+      "product": "pyruvate dehydrogenase E1 component",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.02,
+      "pathway": "pyruvate metabolism"
+    },
+    "G_b0115": {
+      "name": "aceF",
+      "product": "pyruvate dehydrogenase E2 component",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.01,
+      "pathway": "pyruvate metabolism"
+    },
+    "G_b0116": {
+      "name": "lpd",
+      "product": "dihydrolipoamide dehydrogenase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.03,
+      "pathway": "multiple"
+    },
+    "G_b0875": {
+      "name": "pykF",
+      "product": "pyruvate kinase I",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.04,
+      "pathway": "glycolysis"
+    },
+    "G_b1136": {
+      "name": "icd",
+      "product": "isocitrate dehydrogenase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.02,
+      "pathway": "TCA cycle"
+    },
+    "G_b1676": {
+      "name": "pykA",
+      "product": "pyruvate kinase II",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.03,
+      "pathway": "glycolysis"
+    },
+    "G_b1779": {
+      "name": "gapA",
+      "product": "glyceraldehyde-3-phosphate dehydrogenase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.01,
+      "pathway": "glycolysis"
+    },
+    "G_b1819": {
+      "name": "pfkA",
+      "product": "6-phosphofructokinase I",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.02,
+      "pathway": "glycolysis"
+    },
+    "G_b2458": {
+      "name": "fbaA",
+      "product": "fructose-bisphosphate aldolase class II",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.03,
+      "pathway": "glycolysis"
+    },
+    "G_b2779": {
+      "name": "eno",
+      "product": "enolase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.02,
+      "pathway": "glycolysis"
+    },
+    "G_b2925": {
+      "name": "pgk",
+      "product": "phosphoglycerate kinase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.01,
+      "pathway": "glycolysis"
+    },
+    "G_b3115": {
+      "name": "tpiA",
+      "product": "triose-phosphate isomerase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.02,
+      "pathway": "glycolysis"
+    },
+    "G_b3731": {
+      "name": "pgi",
+      "product": "glucose-6-phosphate isomerase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.03,
+      "pathway": "glycolysis"
+    },
+    "G_b3733": {
+      "name": "gpmA",
+      "product": "2,3-bisphosphoglycerate-dependent phosphoglycerate mutase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.02,
+      "pathway": "glycolysis"
+    },
+    "G_b3734": {
+      "name": "eno",
+      "product": "enolase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.02,
+      "pathway": "glycolysis"
+    },
+    "G_b3956": {
+      "name": "pgl",
+      "product": "6-phosphogluconolactonase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.04,
+      "pathway": "pentose phosphate pathway"
+    },
+    "G_b4152": {
+      "name": "talA",
+      "product": "transaldolase A",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.03,
+      "pathway": "pentose phosphate pathway"
+    },
+    "G_b4153": {
+      "name": "tktB",
+      "product": "transketolase 2",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.02,
+      "pathway": "pentose phosphate pathway"
+    },
+    "G_b4154": {
+      "name": "zwf",
+      "product": "glucose-6-phosphate 1-dehydrogenase",
+      "essentiality": "essential",
+      "confidence": "high",
+      "growth_rate_ratio": 0.01,
+      "pathway": "pentose phosphate pathway"
+    }
+  }
+}
