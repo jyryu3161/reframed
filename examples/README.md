@@ -89,7 +89,59 @@ This directory contains various examples demonstrating the use of ReFramed for m
   benchmark.add_method(SimpleExpressionMethod(threshold=2.0))
   ```
 
-### 5. `ecoli_gimme_eflux_example.py` - 상세 분석 예제
+### 5. `gene_essentiality_evaluation.py` - Gene Essentiality 평가 모듈 🆕
+**난이도:** ⭐⭐⭐ 고급 (Advanced)
+
+Gene knockout 실험 데이터로 모델을 검증하는 모듈입니다.
+
+- **주요 기능:**
+  - Essentiality 데이터 로딩 (CSV/JSON)
+  - Gene knockout 시뮬레이션
+  - 예측 vs 실험 데이터 비교
+  - 성능 메트릭 계산 (Accuracy, Precision, Recall, F1, MCC)
+  - Confusion matrix 분석
+
+- **사용 방법:**
+  ```python
+  from gene_essentiality_evaluation import (
+      load_essentiality_data,
+      GeneEssentialityEvaluator
+  )
+
+  # 데이터 로딩
+  ess_data = load_essentiality_data('data/ecoli_gene_essentiality.csv')
+
+  # 평가
+  evaluator = GeneEssentialityEvaluator(model, ess_data)
+  evaluation = evaluator.evaluate_fba()
+
+  # 결과 확인
+  evaluator.print_metrics(evaluation)
+  ```
+
+### 6. `essentiality_benchmark_example.py` - Essentiality 벤치마크 예제 🆕
+**난이도:** ⭐⭐ 중급 (Intermediate)
+
+Gene essentiality 데이터로 모델을 평가하는 완전한 예제입니다.
+
+- **포함 내용:**
+  - FBA/pFBA로 knockout 시뮬레이션
+  - 실험 데이터와 비교
+  - Confusion matrix 및 메트릭
+  - Threshold 민감도 분석
+  - 경로별 essentiality 분석
+
+- **실행 방법:**
+  ```bash
+  cd examples
+  python essentiality_benchmark_example.py
+  ```
+
+- **결과 파일:**
+  - `essentiality_predictions.csv` - 각 유전자별 예측
+  - `essentiality_comparison.csv` - 방법론 비교
+
+### 7. `ecoli_gimme_eflux_example.py` - 상세 분석 예제
 **난이도:** ⭐⭐⭐ 고급 (Advanced)
 
 GIMME와 E-Flux 방법론에 대한 포괄적인 분석 예제입니다.

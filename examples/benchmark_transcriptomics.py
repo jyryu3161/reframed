@@ -234,9 +234,15 @@ class TranscriptomicsBenchmark:
     >>> benchmark.add_method(GIMMEMethod(cutoff=25, growth_frac=0.9))
     >>> results = benchmark.run_all()
     >>> benchmark.print_summary()
+
+    With essentiality evaluation:
+    >>> benchmark.set_essentiality_data(essentiality_data)
+    >>> benchmark.run_all_with_essentiality()
+    >>> benchmark.print_essentiality_summary()
     """
 
-    def __init__(self, model, gene_expression: Dict[str, float]):
+    def __init__(self, model, gene_expression: Dict[str, float],
+                 essentiality_data: Optional[Dict] = None):
         """
         Initialize benchmark with model and expression data.
 
@@ -246,11 +252,15 @@ class TranscriptomicsBenchmark:
             The metabolic model to benchmark
         gene_expression : dict
             Gene expression data {gene_id: expression_value}
+        essentiality_data : dict, optional
+            Gene essentiality data for model validation
         """
         self.model = model
         self.gene_expression = gene_expression
         self.methods: List[TranscriptomicsMethod] = []
         self.results: List[BenchmarkResult] = []
+        self.essentiality_data = essentiality_data
+        self.essentiality_evaluations: Dict[str, Any] = {}
 
     def add_method(self, method: TranscriptomicsMethod):
         """Add a method to the benchmark."""
@@ -480,6 +490,126 @@ class TranscriptomicsBenchmark:
         df.to_csv(filename, index=False)
 
         print(f"\nDetailed fluxes exported to: {filename}")
+
+    def set_essentiality_data(self, essentiality_data: Dict):
+        """
+        Set gene essentiality data for model validation.
+
+        Parameters
+        ----------
+        essentiality_data : dict
+            Gene essentiality data from load_essentiality_data()
+        """
+        self.essentiality_data = essentiality_data
+        print(f"✓ Essentiality data set for {len(essentiality_data)} genes")
+
+    def evaluate_with_essentiality(self, growth_threshold: float = 0.01) -> pd.DataFrame:
+        """
+        Evaluate all methods using gene essentiality data.
+
+        Parameters
+        ----------
+        growth_threshold : float
+            Growth rate threshold for essentiality prediction
+
+        Returns
+        -------
+        DataFrame
+            Essentiality evaluation results
+        """
+        if self.essentiality_data is None:
+            raise ValueError("Essentiality data not set. Use set_essentiality_data() first.")
+
+        # Import here to avoid circular dependency
+        try:
+            from gene_essentiality_evaluation import GeneEssentialityEvaluator
+        except ImportError:
+            print("Error: gene_essentiality_evaluation module not found")
+            return None
+
+        evaluator = GeneEssentialityEvaluator(
+            self.model,
+            self.essentiality_data,
+            growth_threshold=growth_threshold
+        )
+
+        eval_results = []
+
+        print(f"\n{'='*70}")
+        print("Evaluating Methods with Gene Essentiality Data")
+        print(f"{'='*70}")
+
+        for result in self.results:
+            method_name = result.method_name
+
+            # Determine method type
+            if 'FBA' in method_name and 'pFBA' not in method_name and 'GIMME' not in method_name:
+                predictions = evaluator.predict_essentiality(method='fba')
+            elif 'pFBA' in method_name:
+                predictions = evaluator.predict_essentiality(method='pfba')
+            elif 'GIMME' in method_name:
+                # Extract parameters from method_name if possible
+                params = result.parameters
+                predictions = evaluator.predict_essentiality(
+                    method='gimme',
+                    gene_exp=self.gene_expression,
+                    **params
+                )
+            elif 'E-Flux' in method_name or 'eFlux' in method_name:
+                params = result.parameters
+                predictions = evaluator.predict_essentiality(
+                    method='eflux',
+                    gene_exp=self.gene_expression,
+                    **params
+                )
+            else:
+                print(f"Skipping {method_name}: Unknown method type")
+                continue
+
+            evaluation = evaluator.calculate_metrics(predictions, method_name)
+            self.essentiality_evaluations[method_name] = evaluation
+
+            eval_results.append({
+                'Method': method_name,
+                'Accuracy': evaluation.accuracy,
+                'Precision': evaluation.precision,
+                'Recall': evaluation.recall,
+                'F1-Score': evaluation.f1_score,
+                'MCC': evaluation.mcc,
+                'TP': evaluation.true_positives,
+                'TN': evaluation.true_negatives,
+                'FP': evaluation.false_positives,
+                'FN': evaluation.false_negatives,
+            })
+
+            print(f"✓ {method_name}: Accuracy={evaluation.accuracy:.3f}, "
+                  f"F1={evaluation.f1_score:.3f}")
+
+        return pd.DataFrame(eval_results)
+
+    def print_essentiality_summary(self):
+        """Print summary of essentiality evaluation results."""
+        if not self.essentiality_evaluations:
+            print("No essentiality evaluations available.")
+            print("Run evaluate_with_essentiality() first.")
+            return
+
+        print(f"\n{'='*100}")
+        print("GENE ESSENTIALITY EVALUATION SUMMARY")
+        print(f"{'='*100}")
+
+        # Header
+        print(f"{'Method':<35} {'Accuracy':>10} {'Precision':>10} {'Recall':>10} "
+              f"{'F1-Score':>10} {'MCC':>10}")
+        print("-" * 100)
+
+        # Results
+        for method_name, evaluation in self.essentiality_evaluations.items():
+            print(f"{method_name:<35} {evaluation.accuracy:>10.4f} "
+                  f"{evaluation.precision:>10.4f} {evaluation.recall:>10.4f} "
+                  f"{evaluation.f1_score:>10.4f} {evaluation.mcc:>10.4f}")
+
+        print("=" * 100)
 
 
 def generate_sample_expression(model, condition: str = 'aerobic_glucose',
