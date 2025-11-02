@@ -343,6 +343,12 @@ def main():
     # Define model path
     model_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'tests', 'data')
 
+    # Check if running from examples/ or root directory
+    if os.path.exists('tests/data/e_coli_core.xml.gz'):
+        core_model_path = 'tests/data/e_coli_core.xml.gz'
+    else:
+        core_model_path = os.path.join(model_dir, 'e_coli_core.xml.gz')
+
     # ========================================================================
     # Example 1: E. coli Core Model
     # ========================================================================
@@ -350,7 +356,6 @@ def main():
     print("Example 1: E. coli Core Model Analysis")
     print("="*70)
 
-    core_model_path = os.path.join(model_dir, 'e_coli_core.xml.gz')
     print(f"\nLoading model: {core_model_path}")
 
     core_model = load_cbmodel(core_model_path)

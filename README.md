@@ -102,6 +102,9 @@ print(f"E-Flux growth: {eflux_solution.fobj:.4f}")
 See the [`examples/`](examples/) directory for comprehensive examples:
 
 - **`simple_gimme_eflux.py`** - Quick start with E. coli core model
+- **`quick_benchmark.py`** - 🆕 Fast benchmark comparing multiple methods
+- **`benchmark_transcriptomics.py`** - 🆕 Comprehensive benchmarking framework
+- **`custom_method_template.py`** - 🆕 Templates for implementing new methods
 - **`ecoli_gimme_eflux_example.py`** - Advanced analysis with:
   - Condition-specific expression simulation (aerobic/anaerobic)
   - Parameter sensitivity analysis
@@ -111,9 +114,49 @@ See the [`examples/`](examples/) directory for comprehensive examples:
 Run examples:
 ```bash
 cd examples
-python simple_gimme_eflux.py
-python ecoli_gimme_eflux_example.py
+python simple_gimme_eflux.py          # Basic example
+python quick_benchmark.py             # Quick method comparison
+python benchmark_transcriptomics.py   # Full benchmark suite
+python ecoli_gimme_eflux_example.py   # Detailed analysis
 ```
+
+#### 🆕 Benchmark Framework
+
+Compare multiple methods systematically:
+
+```python
+from benchmark_transcriptomics import TranscriptomicsBenchmark, FBAMethod, GIMMEMethod
+
+benchmark = TranscriptomicsBenchmark(model, gene_expression)
+benchmark.add_methods([
+    FBAMethod(),
+    GIMMEMethod(cutoff=25),
+    GIMMEMethod(cutoff=50),
+])
+
+results = benchmark.run_all()
+benchmark.print_summary()
+benchmark.export_results('results.csv')
+```
+
+#### 🆕 Adding Custom Methods
+
+Extend the framework with your own algorithms using provided templates:
+
+```python
+from benchmark_transcriptomics import TranscriptomicsMethod
+
+class MyMethod(TranscriptomicsMethod):
+    def run(self, model, gene_exp, **kwargs):
+        # Implement your algorithm
+        solution = your_algorithm(model, gene_exp)
+        return self._calculate_metrics(solution, self.name, exec_time)
+
+# Use in benchmark
+benchmark.add_method(MyMethod())
+```
+
+See `custom_method_template.py` for detailed templates and examples.
 
 #### Typical Workflow
 
